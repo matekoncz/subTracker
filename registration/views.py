@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.template import Context, Template, loader
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 # Create your views here.
 
@@ -12,6 +12,11 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model=User
         fields = ['username','email','password1','password2'] 
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=64)
+    password = forms.CharField(max_length=64,widget=forms.PasswordInput)
+    
 
 def registrate(request: HttpRequest):
     if request.method == 'GET':
@@ -27,3 +32,22 @@ def registrate(request: HttpRequest):
             return redirect('hello')
         else:
             return redirect('hello')
+        
+def signin(request: HttpRequest):
+    if(request.method == 'GET'):
+        template = loader.get_template("login.html")
+        context = {"form":LoginForm(),"errors":[]}
+        return HttpResponse(template.render(context,request))
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if(form.is_valid()):
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            user = authenticate(request,username=username,password=password)
+            if user:
+                login(request,user)
+                return redirect('hello')
+            else:      
+                template = loader.get_template("login.html")
+                context = {"form": LoginForm,"errors":["Wrong username or Password"]}
+                return HttpResponse(template.render(context,request))

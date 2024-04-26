@@ -6,4 +6,4 @@ from django.http import HttpResponse
 
 def hello(request):
     template = loader.get_template("homeTemplate.html")
-    return HttpResponse(template.render())
+    return HttpResponse(template.render(request=request))
