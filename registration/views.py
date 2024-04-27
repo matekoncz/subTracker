@@ -4,8 +4,7 @@ from django.shortcuts import redirect, render
 from django.template import Context, Template, loader
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.contrib.auth import login, authenticate, logout
 # Create your views here.
 
 class RegisterForm(UserCreationForm):
@@ -51,3 +50,7 @@ def signin(request: HttpRequest):
                 template = loader.get_template("login.html")
                 context = {"form": LoginForm,"errors":["Wrong username or Password"]}
                 return HttpResponse(template.render(context,request))
+
+def signout(request: HttpRequest):
+    logout(request)
+    return redirect('hello')

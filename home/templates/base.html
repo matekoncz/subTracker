@@ -8,6 +8,9 @@
 <div class="menu">
     <a href="/registration">Sign up</a>
     <a href="/login">Log in</a>
+    {% if request.user%}
+    <a href="/logout">Log out</a>
+    {% endif%}
 </div>
 {%endblock menubar%}
 <div>
