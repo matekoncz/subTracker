@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+{%block content%}
+
+<h1>Categories</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Number of subscriptions</th>
+        <th></th>
+    </tr>
+{%for category in categories%}
+<tr>
+    <td>{{category.name}}</td>
+    <td>{{category.description}}</td>
+    <td>0</td>
+    <td><a>remove</a></td>
+</tr>
+{%endfor%}
+</table>
+{%endblock%}

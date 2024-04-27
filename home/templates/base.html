@@ -8,8 +8,11 @@
 <div class="menu">
     <a href="/registration">Sign up</a>
     <a href="/login">Log in</a>
-    {% if request.user%}
-    <a href="/logout">Log out</a>
+    {% if request.user.is_authenticated%}
+    <form action="/logout/" method="post">
+        {%csrf_token%}
+        <button type="submit">Log out</button>
+    </form>
     {% endif%}
 </div>
 {%endblock menubar%}
