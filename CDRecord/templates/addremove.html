@@ -18,4 +18,19 @@
 </tr>
 {%endfor%}
 </table>
+<h2>Add a category</h2>
+<form method="post" action="/addCategory/">
+    {%csrf_token%}
+    {%for field in categoryform%}
+        {% if field.errors %}
+            <ul class="errorlist">
+            {% for error in field.errors %}
+             <li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {{ field.label_tag }} {{ field }}
+    {%endfor%}
+    <input type="submit" value="add category"/>
+</form>
 {%endblock%}
