@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 {%block content%}
-
+{%load customfilters %}
 <h1>Categories</h1>
 <table>
     <tr>
@@ -13,7 +13,9 @@
 <tr>
     <td>{{category.name}}</td>
     <td>{{category.description}}</td>
-    <td>0</td>
+    {% with name=category.name%}
+    <td>{{ catnum|key:name }}</td>
+    {%endwith%}
     <td>
         <form method="post" action="\removecat\{{category.name}}">
             {%csrf_token%}
@@ -37,5 +39,43 @@
         {{ field.label_tag }} {{ field }}
     {%endfor%}
     <input type="submit" value="add category"/>
+</form>
+
+<h1>Subscriptions</h1>
+<table>
+    <tr>
+        <th>Service name</th>
+        <th>category</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+{%for sub in subscriptions%}
+<tr>
+    <td>{{sub.service_name}}</td>
+    <td>{{sub.category.name}}</td>
+    <td>{{sub.price}}</td>
+    <td>
+        <form method="post" action="\removesub\{{sub.service_name}}">
+            {%csrf_token%}
+            <button type="submit">Remove</button>
+        </form>
+    </td>
+</tr>
+{%endfor%}
+</table>
+<h2>Add a subscription</h2>
+<form method="post" action="/addsubscription/">
+    {%csrf_token%}
+    {%for field in subscriptionform%}
+        {% if field.errors %}
+            <ul class="errorlist">
+            {% for error in field.errors %}
+             <li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {{ field.label_tag }} {{ field }}
+    {%endfor%}
+    <input type="submit" value="add subscription"/>
 </form>
 {%endblock%}
