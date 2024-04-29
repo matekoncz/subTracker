@@ -3,9 +3,13 @@
 {%block content%}
 <body>
 
-<h1>Hello vilag!</h1>
-<p>paragramfus</p>
-<h2>dzsamgo</h2>
-<p>{{request.user.username}}</p>
+<h1>Dear visitor,</h1>
+
+{% if request.user.is_authenticated%}
+    <a href="/myrecords/">Manage your subscriptions</a>
+{%else%}
+    <h2>Please log in or sign up to use our services</h2>
+{%endif%}
+
 </body>
 {%endblock content%}

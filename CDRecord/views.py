@@ -1,9 +1,10 @@
 from django import forms
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.template import Context, Template, loader
 from home.models import Category, Subscription
 from home.appforms import CategoryForm
+
 
 # Create your views here.
 
@@ -22,3 +23,8 @@ def addCategory(request: HttpRequest):
             return redirect('my records')
         except Exception as e:
             return redirect(e.msg)
+        
+def removeCat(request: HttpRequest,name):
+    category = get_object_or_404(Category,name=name,user=request.user)
+    category.delete()
+    return redirect('my records')
