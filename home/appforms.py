@@ -23,7 +23,7 @@ class FieldGenerator():
         choices = []
         for cat in cats:
             choices.append((cat.name, cat.name))
-        return forms.ChoiceField(choices=choices)
+        return forms.ChoiceField(choices=choices,required=True)
 
 class SubscriptionForm(forms.Form):
 

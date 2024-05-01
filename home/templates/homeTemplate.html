@@ -3,11 +3,21 @@
 {%block content%}
 <body>
 
-<h1>Dear visitor,</h1>
+
 
 {% if request.user.is_authenticated%}
-    <a href="/myrecords/">Manage your subscriptions</a>
+    {% load static %}
+    <a href="/myrecords/" class="button">Manage your subscriptions</a>
+    <div class="plots">
+    <h3>Your subscriptions per categories</h3>
+    <img src="{% static 'plots/categories_by_sub_sum.png' %}" alt="plot by sub"/>
+    <h3>Money spent on your subscriptions (in USD)</h3>
+    <img src="{% static 'plots/categories_by_money_spent.png' %}" alt="plot by money"/>
+    <h3>Most expensive subscriptions (in USD)</h3>
+    <img src="{% static 'plots/for_subs.png' %}" alt="expensive subs"/>
+    </div>
 {%else%}
+    <h1>Dear visitor,</h1>
     <h2>Please log in or sign up to use our services</h2>
 {%endif%}
 

@@ -1,13 +1,16 @@
 
 <!DOCTYPE html>
+{% load static %}
 <head>
     <title>Subscription tracker</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/base.css'%}" />
 </head>
 <body>
 {%block menubar%}
 <div class="menu">
+    <a href="/hello/" class="home">Home</a>
     {% if request.user.is_authenticated%}
-    Logged in as {{request.user.username}}
+    <p>Logged in as {{request.user.username}}<p>
     <form action="/logout/" method="post">
         {%csrf_token%}
         <button type="submit">Log out</button>

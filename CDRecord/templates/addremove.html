@@ -1,7 +1,9 @@
 {% extends 'base.html'%}
 {%block content%}
 {%load customfilters %}
+<div class="addremove">
 <h1>Categories</h1>
+<div class="tablecon">
 <table>
     <tr>
         <th>Name</th>
@@ -25,6 +27,7 @@
 </tr>
 {%endfor%}
 </table>
+</div>
 <h2>Add a category</h2>
 <form method="post" action="/addCategory/">
     {%csrf_token%}
@@ -38,10 +41,11 @@
         {% endif %}
         {{ field.label_tag }} {{ field }}
     {%endfor%}
-    <input type="submit" value="add category"/>
+    <button type="submit">add category</button>
 </form>
 
 <h1>Subscriptions</h1>
+<div class="tablecon">
 <table>
     <tr>
         <th>Service name</th>
@@ -63,6 +67,7 @@
 </tr>
 {%endfor%}
 </table>
+</div>
 <h2>Add a subscription</h2>
 <form method="post" action="/addsubscription/">
     {%csrf_token%}
@@ -76,6 +81,7 @@
         {% endif %}
         {{ field.label_tag }} {{ field }}
     {%endfor%}
-    <input type="submit" value="add subscription"/>
+    <button type="submit">add subscription</button>
 </form>
+</div>
 {%endblock%}
