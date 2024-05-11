@@ -1,0 +1,17 @@
+[project]
+name = "subtracker"
+version = "0.0.2"
+dependencies = [
+    "Django",
+    "matplotlib",
+    "numpy"
+]
+
+[tool.setuptools]
+packages = ['home', 'CDRecord', 'szinhaz_km', 'registration']
+py-modules = ['manage']
+
+[build-system]
+requires = [
+    "setuptools>=60",
+    "setuptools-scm>=8.0"]

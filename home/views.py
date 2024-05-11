@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.template import loader
 from django.http import HttpRequest, HttpResponse
 
@@ -17,3 +18,6 @@ def hello(request: HttpRequest):
         plot_categories_by_money_spent(request.user)
         bar_for_subs(request.user)
     return HttpResponse(template.render(request=request))
+
+def redirect_to_hello(request):
+    return redirect("hello")
