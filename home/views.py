@@ -1,5 +1,4 @@
 from django.template import loader
-from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 
 from home.plotter import plot_categories_by_money_spent, plot_categories_by_sub_sum, bar_for_subs

@@ -1,0 +1,11 @@
+[MAIN]
+
+load-plugins=
+    pylint_django
+
+django-settings-module=szinhaz_km.settings
+
+disable=
+    C0114,
+    C0115,
+    C0116
