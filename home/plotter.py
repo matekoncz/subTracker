@@ -15,10 +15,10 @@ def plot_categories_by_sub_sum(user):
     catname = []
     subsum = []
     for cat in Category.objects.filter(user=user):
-        to_subsum=Subscription.objects.filter(
-                category=get_object_or_404(Category, name=cat.name, user=user)
-            ).count()
-        if(to_subsum==0):
+        to_subsum = Subscription.objects.filter(
+            category=get_object_or_404(Category, name=cat.name, user=user)
+        ).count()
+        if to_subsum == 0:
             continue
         subsum.append(to_subsum)
         catname.append(cat.name)
@@ -29,15 +29,17 @@ def plot_categories_by_sub_sum(user):
     my_path = Path(os.path.abspath(__file__)).parent.absolute()
     plt.savefig(str(my_path) + "/static/plots/categories_by_sub_sum.png")
     plt.close()
-    return {"names":catname, "sums": subsum}
+    return {"names": catname, "sums": subsum}
 
 
 def plot_categories_by_money_spent(user):
     catname = []
     moneysum = []
     for cat in Category.objects.filter(user=user):
-        to_money_sum = Subscription.objects.filter(category=get_object_or_404(Category, name=cat.name, user=user)).aggregate(Sum("price"))["price__sum"]
-        if(to_money_sum==None):
+        to_money_sum = Subscription.objects.filter(
+            category=get_object_or_404(Category, name=cat.name, user=user)
+        ).aggregate(Sum("price"))["price__sum"]
+        if to_money_sum is None:
             continue
         moneysum.append(to_money_sum)
         catname.append(cat.name)
@@ -53,7 +55,7 @@ def plot_categories_by_money_spent(user):
     my_path = Path(os.path.abspath(__file__)).parent.absolute()
     plt.savefig(str(my_path) + "/static/plots/categories_by_money_spent.png")
     plt.close()
-    return {"names":catname, "sums": moneysum}
+    return {"names": catname, "sums": moneysum}
 
 
 def bar_for_subs(user):

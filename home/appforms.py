@@ -36,4 +36,4 @@ class SubscriptionForm(forms.Form):
         self.fields["category"] = FieldGenerator.custom_category_field(user)
 
     service_name = forms.CharField(max_length=128, required=True)
-    price = forms.DecimalField(required=True, min_value=0,label="price (in USD)")
+    price = forms.DecimalField(required=True, min_value=0, label="price (in USD)")

@@ -2,3 +2,5 @@
 *.sqlite3.bak
 *.pyc
 htmlcov
+.ruff_cache
+.coverage

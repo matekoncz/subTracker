@@ -9,7 +9,7 @@ from home.appforms import CategoryForm, SubscriptionForm
 
 
 def addremove(request: HttpRequest):
-    if(not request.user.is_authenticated):
+    if not request.user.is_authenticated:
         return redirect("hello")
     if request.method == "GET":
         template = loader.get_template("addremove.html")
