@@ -4,32 +4,36 @@ from django.contrib.auth.models import User
 
 from home.models import Category
 
+
 class RegisterForm(UserCreationForm):
     class Meta:
-        model=User
-        fields = ['username','email','password1','password2']
+        model = User
+        fields = ["username", "email", "password1", "password2"]
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=64)
-    password = forms.CharField(max_length=64,widget=forms.PasswordInput)
+    password = forms.CharField(max_length=64, widget=forms.PasswordInput)
+
 
 class CategoryForm(forms.Form):
     name = forms.CharField(max_length=128)
     description = forms.CharField(max_length=256)
 
-class FieldGenerator():
-    def CustomCategoryField(user):
+
+class FieldGenerator:
+    def custom_category_field(user):
         cats = Category.objects.filter(user=user)
         choices = []
         for cat in cats:
             choices.append((cat.name, cat.name))
-        return forms.ChoiceField(choices=choices,required=True)
+        return forms.ChoiceField(choices=choices, required=True)
+
 
 class SubscriptionForm(forms.Form):
-
     def __init__(self, user, *args, **kwargs):
         super(SubscriptionForm, self).__init__(*args, **kwargs)
-        self.fields['category'] = FieldGenerator.CustomCategoryField(user)
+        self.fields["category"] = FieldGenerator.custom_category_field(user)
 
-    service_name = forms.CharField(max_length=128,required=True)
-    price = forms.DecimalField(required=True,min_value=0)
+    service_name = forms.CharField(max_length=128, required=True)
+    price = forms.DecimalField(required=True, min_value=0,label="price (in USD)")

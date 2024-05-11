@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class CdrecordConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'CDRecord'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "CDRecord"
